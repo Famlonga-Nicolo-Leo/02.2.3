@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 })
 export class FooComponent {
   data! : any;
+  pokemonDetail!: any;
+  detail!: any;
   loading: boolean = false;
   o! :Observable<Object>;
 
@@ -25,11 +27,23 @@ export class FooComponent {
     this.data = d
     
   }
+  Getnamepokemon = (d: any) => {
+    this.loading = false;
+    this.detail = d;
+}
   onTypeClick(type: any): void {
-    if (type.name == "normal"){
-      this.o = this.http.get("https://pokeapi.co/api/v2/type/" + type.name)
-      this.o.subscribe(this.GetData)
-    } 
+    console.log(type.name);  // cosa stampa?
+    console.log("https://pokeapi.co/api/v2/type/" + type.name);  // URL corretto?
+    this.o = this.http.get("https://pokeapi.co/api/v2/type/" + type.name);
+    this.o.subscribe(this.Getnamepokemon);
+}
+onPokemonClick(pokemon: any): void {
+    this.o = this.http.get(pokemon.pokemon.url);  // usa l'url che già ti da la PokeAPI
+    this.o.subscribe(this.GetPokemonDetail);
+}
+
+GetPokemonDetail = (d: any) => {
+    this.pokemonDetail = d;
 }
 
 }

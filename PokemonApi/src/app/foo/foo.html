@@ -3,8 +3,18 @@
     <div>loading...</div>
 }
 @if (data != null){
-    @for (i of data.results.slice(0,3); track i){
-        <div (click)="onTypeClick(i)" >{{i.name}}</div>
+    @for (i of data.results.slice(0,3); track i.name){
+    <div (click)="onTypeClick(i)">{{i.name}}</div>
     }
-    
 }
+@if (detail != null){
+    @for (p of detail.pokemon.slice(0,3); track p.pokemon.name){
+        <div (click)="onPokemonClick(p)" >{{p.pokemon.name}}</div>
+    }
+}
+@if (pokemonDetail != null){
+    <div>Nome: {{pokemonDetail.name}}</div>
+    <div>Tipo: {{pokemonDetail.types[0].type.name}}</div>
+    <div>Livello base: {{pokemonDetail.base_experience}}</div>
+}
+
