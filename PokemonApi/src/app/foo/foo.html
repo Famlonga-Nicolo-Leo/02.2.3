@@ -1,0 +1,10 @@
+<button type="button" (click)="MakeRequest()">Mostra tipi pokemon</button>
+@if (loading){
+    <div>loading...</div>
+}
+@if (data != null){
+    @for (i of data.results.slice(0,3); track i){
+        <div (click)="onTypeClick(i)" >{{i.name}}</div>
+    }
+    
+}
